@@ -34,7 +34,7 @@ public class SecurityConfig {
 		User.UserBuilder users = User.builder();
 		UserDetails sarah = users
 				.username("sarah1")
-				.password(passwordEncoder.encode("abc123"))
+				.password(passwordEncoder().encode("abc123"))
 				.roles("CARD-OWNER")
 				.build();
 
@@ -43,6 +43,12 @@ public class SecurityConfig {
 				.password(passwordEncoder().encode("qrs456"))
 				.roles("NON-OWNER")
 				.build();
-		return new InMemoryUserDetailsManager(sarah, hankOwnsNoCards);
+
+		UserDetails kumar = users
+				.username("kumar2")
+				.password(passwordEncoder().encode("xyz789"))
+				.roles("CARD-OWNER")
+				.build();
+		return new InMemoryUserDetailsManager(sarah, hankOwnsNoCards, kumar);
 	}
 }
